@@ -1,6 +1,6 @@
 #include "stackArray.h"
 
-
+/* Add to the top of the stack */
 void push(int new_item)
 {
 	if (first < STACK_SIZE) {
@@ -12,7 +12,7 @@ void push(int new_item)
 
 }
 
-
+/* retrieve the top of the stack */
 int pop()
 {
 	int ret = -1;
@@ -28,7 +28,7 @@ int pop()
 }
 
 
-
+/* check if the stack is empty */
 bool is_empty()
 {
 	return (first == 0);	

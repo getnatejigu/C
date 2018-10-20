@@ -1,5 +1,8 @@
 #include "stackArray.h"
 
+/* Test program to exercise stack array code */
+
+/* print the stack elements */
 void print_stack()
 {
 	int i = 0;
@@ -12,6 +15,7 @@ void print_stack()
 	printf("\n");
 }
 
+/* exercise stack array code here */
 int main()
 {
 	
@@ -26,6 +30,7 @@ int main()
 	int i;
 	for(i = 0; i < 12; i++) {
 		push(i);
+		print_stack();
 	}
 
 	print_stack();
