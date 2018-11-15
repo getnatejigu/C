@@ -2,6 +2,11 @@
 
 #define ARY_SIZE 10
 
+/* 1 for recursive merge sort */
+/* 0 for interative merge sort */
+#define ENABLE_RECUSIVE 1      
+	
+
 void print_array(int *arr, int size)
 {
 	int i;
@@ -41,8 +46,27 @@ void merge(int *arr, int *aux, int lo, int mid, int hi)
 	}
 }
 
+/*
+ * ENABLE_RECUSIVE set to 0 
+ * uses iterative algorithm for merge sort
+ */
+void iterative_merge_sort(int *arr, int *aux, int size)
+{
+	int i, lo;
 
-void merge_sort(int *arr, int *aux, int lo, int hi)
+	for (i = 1; i < size; i = i + i) {
+		for (lo = 0; lo < (size - i); lo += i + i) {
+			int min = ((lo + i + i - 1) < (size - 1)) ? (lo + i + i - 1) : (size - 1);
+			merge(arr, aux, lo, (lo + i - 1), min);
+		}
+	}
+}
+
+/*
+ * ENABLE_RECUSIVE set to 1 
+ * uses recursive algorithm for merge sort
+ */
+void recursive_merge_sort(int *arr, int *aux, int lo, int hi)
 {
 	
 	if (lo >= hi) {
@@ -51,8 +75,8 @@ void merge_sort(int *arr, int *aux, int lo, int hi)
 
 	int mid = lo + (hi - lo) / 2;
 
-	merge_sort(arr, aux, lo, mid);
-	merge_sort(arr, aux, mid + 1, hi);
+	recursive_merge_sort(arr, aux, lo, mid);
+	recursive_merge_sort(arr, aux, mid + 1, hi);
 	merge(arr, aux, lo, mid, hi);
 }
 
@@ -61,7 +85,12 @@ void sort(int *arr, int size)
 	int aux[ARY_SIZE]; /* temporary array */
 
 	/* begin sorting here */
-	merge_sort(arr, aux, 0, ARY_SIZE - 1);
+	if (ENABLE_RECUSIVE) {
+		recursive_merge_sort(arr, aux, 0, ARY_SIZE - 1);
+	}
+	else {
+		iterative_merge_sort(arr, aux, ARY_SIZE);
+	}
 }
 
 int main() 
