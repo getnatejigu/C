@@ -11,9 +11,9 @@ gcd_euclid(int a, int b)
 	int tmp;
 
 	while (b != 0) {
-		tmp = a;
+		tmp = a % b;
 		a = b;
-		b = tmp % b;
+		b = tmp;
 	}
 
 	return a;
