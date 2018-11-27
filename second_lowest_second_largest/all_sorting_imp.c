@@ -20,24 +20,36 @@ Output:"90 4"
 #include <stdio.h>
 
 void
+print_array(int arr[], int size)
+{
+    int i;
+    for(i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+}
+
+/* merge sort */
+void
 merge(int arr[], int aux[], int lo, int mid, int hi)
 {
     int i, j, k;
-    for(i = lo; i < hi; i++) {
+    for(i = lo; i <= hi; i++) {
         aux[i] = arr[i];
     }
     
     i = lo;
     j = mid + 1;
-    for(k = lo; k < hi; k++) {
+    for(k = lo; k <= hi; k++) {
         if(i > mid) {
             arr[k] = aux[j++]; 
         }
         else if(j > hi) {
             arr[k] = aux[i++];
-        } else if(arr[i] < arr[j]) {
+        }
+        else if(aux[i] < aux[j]) {
             arr[k] = aux[i++];
-        } else {
+        }
+        else {
             arr[k] = aux[j++];
         }
     }
@@ -51,7 +63,7 @@ recursive_merge_sort(int arr[], int aux[], int lo, int hi)
         return;
     }
     
-    int mid = lo + (hi - lo) / 2;
+    int mid = lo + ((hi - lo) / 2);
     
     recursive_merge_sort(arr, aux, lo, mid);
     recursive_merge_sort(arr, aux, mid+1, hi);
@@ -66,6 +78,8 @@ merge_sort(int arr[], int size)
     recursive_merge_sort(arr, aux, 0, size - 1);
 }
 
+
+/* Selection Sort */
 void
 selection_sort(int arr[], int size)
 {
@@ -84,7 +98,7 @@ selection_sort(int arr[], int size)
     }
 }
 
-
+/* Bubble sort */
 void
 bubble_sort(int arr[], int size)
 {
@@ -95,20 +109,21 @@ bubble_sort(int arr[], int size)
             if (arr[j] > arr[j+1]) {
                 int tmp = arr[j];
                 arr[j] = arr[j+1];
-                arr[j+1] = arr[j];
+                arr[j+1] = tmp;
             }
         }
     }
 }
 
+/* Generic Sorting API */
 void
 sort(int arr[], int size)
 {
-    //merge_sort(arr, size);
+    merge_sort(arr, size);
     
-   // selection_sort(arr, size);
+    //selection_sort(arr, size);
     
-    bubble_sort(arr, size);
+    //bubble_sort(arr, size);
 }
 
 void SecondGreatLow(int arr[], int size) { 
@@ -149,7 +164,6 @@ int main(void) {
   SecondGreatLow(A, sizeof(A)/sizeof(A[0]));
   return 0;
     
-} 
-
+}
 
   
