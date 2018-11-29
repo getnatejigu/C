@@ -1,3 +1,5 @@
+/* bubble sort */
+
 #include <stdio.h>
 
 
